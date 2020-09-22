@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+    <script src="css/style.css"></script>
+
+    <title>Boolflix</title>
+</head>
+<body>
+
+    <ul id="list-movies"></ul>
+
+
+    
+    
+    <script id="movie-template" type="text/x-handlebars-template">
+        <li>
+            <h3>{{title}}</h3>
+            <h4>{{title_original}}</h4>
+            <p>{{lang}}</p>
+            <p>Media voto: {{vote}}</p>
+        </li>
+    </script>  
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
