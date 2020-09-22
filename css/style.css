@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.right_search {
+    display: flex;
+    justify-content: center;
+    background-color: red;
+}
+
+.input-search {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.input-button i {
+    display: flex;
+    height: 10px;
+}
