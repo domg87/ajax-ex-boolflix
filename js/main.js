@@ -39,10 +39,10 @@ $(document).ready(function() {
                 },
                 "method": "GET",
                 "success": function(data) {
-                    var risultato = data.results;
-                    renderResults("film",risultato);
+                    var results = data.results;
+                    renderResults("film",results);
                 },
-                "error": function(errore) {
+                "error": function(error) {
                     alert("Errore");
                 }
             }
@@ -62,10 +62,10 @@ $(document).ready(function() {
                 },
                 "method": "GET",
                 "success": function(data) {
-                    var risultato = data.results;
-                    renderResults("tv",risultato);
+                    var results = data.results;
+                    renderResults("tv",results);
                 },
-                "error": function(errore) {
+                "error": function(error) {
                     alert("Errore");
                 }
             }
@@ -96,6 +96,7 @@ $(document).ready(function() {
                 "title_original" : original_title,
                 "lang" : getFlags(results[i].original_language),
                 "vote" : getStarsVote(results[i].vote_average),
+                "poster_path": getPoster(results[i].poster_path),
                 "type": type
             };
             // prepariamo il nostro html
@@ -150,6 +151,20 @@ $(document).ready(function() {
         }
 
         return lang;
+    }
+
+    // funzione che ottiene immagine corrispondente all'elenco
+    function getPoster(poster) {
+        
+        var img = "https://image.tmdb.org/t/p/w185";
+
+        if(poster == null) {
+            img = ;
+        } else {
+            img = "https://image.tmdb.org/t/p/w185" + poster;
+        }
+        return img;
+        
     }
 
 });  
