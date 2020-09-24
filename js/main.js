@@ -10,6 +10,7 @@ $(document).ready(function() {
         
         resetSearch();
         getMovies(searchMovie);
+        getSerieTv(searchMovie);
     });
 
     // avvio la ricerca tramite il tasto invio
@@ -20,11 +21,12 @@ $(document).ready(function() {
 
             resetSearch();
             getMovies(searchMovie);
+            getSerieTv(searchMovie);
         }
 
     });
 
-    // funzione che si occupa della chiamata ajax e stampa il risultato
+    // funzione che si occupa della chiamata ajax FILM e stampa il risultato
     function getMovies(searchString) {
         // chiamata ajax all'interno di una funzione click
         $.ajax(
@@ -38,7 +40,7 @@ $(document).ready(function() {
                 "method": "GET",
                 "success": function(data) {
                     var risultato = data.results;
-                    renderMovie(risultato);
+                    renderResults("film",risultato);
                 },
                 "error": function(errore) {
                     alert("Errore");
@@ -47,18 +49,54 @@ $(document).ready(function() {
         );
     }
 
-    function renderMovie(movies) {
+    // funzione che si occupa della chiamata ajax serieTV e stampa il risultato
+    function getSerieTv(searchString) {
+        // chiamata ajax all'interno di una funzione click
+        $.ajax(
+            {
+                "url": serieAPI,
+                "data": {
+                    "api_key": ApiKey,
+                    "query": searchString,
+                    "language": "it-IT"
+                },
+                "method": "GET",
+                "success": function(data) {
+                    var risultato = data.results;
+                    renderResults("tv",risultato);
+                },
+                "error": function(errore) {
+                    alert("Errore");
+                }
+            }
+        );
+    }
+    
+
+    function renderResults(type, results) {
         // handlebars template
         var source = $("#movie-template").html();
         var template = Handlebars.compile(source);
 
         // stampiamo ogni film ricercato nella chiamata
-        for(var i = 0; i < movies.length; i++) {
+        for(var i = 0; i < results.length; i++) {
+            // creo 2 variabili generiche da passare al context
+            var title, original_title;
+
+            if(type == "film") {
+                title = results[i].title;
+                original_title = results[i].original_title;
+            } else if (type == "tv") {
+                title = results[i].name;
+                original_title = results[i].name;
+            }
+
             var context = {
-                "title" : movies[i].title,
-                "title_original" : movies[i].original_title,
-                "lang" : movies[i].original_language,
-                "vote" : getStarsVote(movies[i].vote_average)
+                "title" : title,
+                "title_original" : original_title,
+                "lang" : getFlags(results[i].original_language),
+                "vote" : getStarsVote(results[i].vote_average),
+                "type": type
             };
             // prepariamo il nostro html
             var html = template(context);
@@ -97,6 +135,21 @@ $(document).ready(function() {
         }
         return vote;
         
+    }
+    // funzione che sostituisce la lingua con icone bandierine
+    function getFlags(lang) {
+        var flags = [
+            "en",
+            "it",
+            "es",
+            "fr"
+        ];
+
+        if(flags.includes(lang)) {
+            return "<img class='flag' src='img/"+lang+".svg'>";
+        }
+
+        return lang;
     }
 
 });  

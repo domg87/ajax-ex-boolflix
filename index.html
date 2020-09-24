@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
-    <!-- <script src="css/style.css"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <title>Boolflix</title>
 </head>
@@ -17,21 +18,24 @@
             <button class="search"><i class="cerca fas fa-search">Cerca</i></button>
         </div>
     </nav>
-
-    <ul id="list-movies"></ul>
+    <div class="container-main">
+        <ul id="list-movies"></ul>
+    
 
 
     
     
-    <script id="movie-template" type="text/x-handlebars-template">
-        <li>
-            <h3>{{title}}</h3>
-            <h4>{{title_original}}</h4>
-            <p>{{lang}}</p>
-            <p>Media voto: {{vote}}</p>
-        </li>
-    </script>  
+        <script id="movie-template" type="text/x-handlebars-template">
+            <li>
+                <h3>{{title}}</h3>
+                <p>{{type}}</p>
+                <h4>{{title_original}}</h4>
+                <p>{{{lang}}}</p>
+                <p>Media voto: {{{vote}}}</p>
+            </li>
+        </script>  
 
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/main.js"></script>
 </body>

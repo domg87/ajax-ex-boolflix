@@ -4,20 +4,25 @@
     margin: 0;
 }
 
+.container-main {
+    padding-left: 40px;
+}
+
 .right_search {
     display: flex;
     justify-content: center;
+    height: 60px;
     background-color: red;
 }
 
 .input-search {
     display: flex;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    align-self: center;
+    width: 100px;
+    height: 50px;
 }
 
-.input-button i {
-    display: flex;
-    height: 10px;
+
+.flag {
+    width: 30px;
 }
