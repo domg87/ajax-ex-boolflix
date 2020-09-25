@@ -6,41 +6,53 @@
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style2.css">
 
     <title>Boolflix</title>
 </head>
 <body>
+    <!-- header wbApp -->
+    <header>
+        <nav class="container">
+            <div class="left_nav">
+                <a href="#"><img src="img/boolflix_logo.png" alt="logo"></a>
+            </div>
+            <div class="right_nav">
+                <input type="text" class="input-search" placeholder="Cerca un film">
+                <button class="search"><i class="cerca fas fa-search">Cerca</i></button>
+            </div>
+        </nav>
+    </header>
+    <!-- fine header wbApp -->
 
-    <nav>
-        <div class="right_search">
-            <input type="text" class="input-search" placeholder="Cerca un film">
-            <button class="search"><i class="cerca fas fa-search">Cerca</i></button>
+    <!-- main webApp -->
+    <main>
+        <div class="container-main">
+            <h2>Film</h2>
+            <ul id="list-movies" class="dir-row"></ul>
+
+            <h2>Serie</h2>
+            <ul id="list-series" class="dir-row"></ul>
+        
+
+
+        
+        
+            <script id="movie-template" type="text/x-handlebars-template">
+                <li>
+                    <div><img class="poster-img" src="{{poster}}" alt="{{title}}"></div>
+                    <h3>{{title}}</h3>
+                    <p>{{type}}</p>
+                    <h4>Titolo Originale: {{title_original}}</h4>
+                    <p>Lingua Originale: {{{lang}}}</p>
+                    <p>Media voto: {{{vote}}}</p>
+                </li>
+            </script>  
+
         </div>
-    </nav>
-    <div class="container-main">
-        <h2>Film</h2>
-        <ul id="list-movies"></ul>
+    </main>
+    <!-- fine main webApp -->
 
-        <h2>Serie</h2>
-        <ul id="list-series"></ul>
-    
-
-
-    
-    
-        <script id="movie-template" type="text/x-handlebars-template">
-            <li>
-                <div><img class="poster-img" src="{{poster}}" alt="{{title}}"></div>
-                <h3>{{title}}</h3>
-                <p>{{type}}</p>
-                <h4>Titolo Originale: {{title_original}}</h4>
-                <p>Lingua Originale: {{{lang}}}</p>
-                <p>Media voto: {{{vote}}}</p>
-            </li>
-        </script>  
-
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/main.js"></script>
 </body>
