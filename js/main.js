@@ -1,60 +1,44 @@
 $(document).ready(function() {
 
     var ApiKey = "b8431a02fcfae2bdf305630c317a0476";
-    var movieApi = "https://api.themoviedb.org/3/search/movie";
-    var serieAPI = "https://api.themoviedb.org/3/search/tv";
+    //var movieApi = "https://api.themoviedb.org/3/search/movie";
+    //var serieAPI = "https://api.themoviedb.org/3/search/tv";
 
     // prendiamo valore input al click cerca
     $(".search").click(function() {
-        var searchMovie = $(".input-search").val();
-        
-        resetSearch();
-        getMovies(searchMovie);
-        getSerieTv(searchMovie);
+        // richiamo funzione search
+        search();
     });
 
     // avvio la ricerca tramite il tasto invio
     $(".input-search").keyup(function() {
 
         if(event.which == 13) {
-            var searchMovie = $(".input-search").val();
-
-            resetSearch();
-            getMovies(searchMovie);
-            getSerieTv(searchMovie);
+            // richiamo funzione search
+            search();
         }
 
     });
 
-    // funzione che si occupa della chiamata ajax FILM e stampa il risultato
-    function getMovies(searchString) {
-        // chiamata ajax all'interno di una funzione click
-        $.ajax(
-            {
-                "url": movieApi,
-                "data": {
-                    "api_key": ApiKey,
-                    "query": searchString,
-                    "language": "it-IT"
-                },
-                "method": "GET",
-                "success": function(data) {
-                    var results = data.results;
-                    renderResults("film",results);
-                },
-                "error": function(error) {
-                    alert("Errore");
-                }
-            }
-        );
+    // funzione di ricerca generica
+    function search() {
+        // prendere il valore della input
+        var searchMovie = $(".input-search").val();
+
+        // richiamo funzione reset
+        resetSearch();
+        // richiamo funzione film
+        getData("movie", searchMovie);
+        // richiamo funzione serie tv
+        getData("tv", searchMovie);
     }
 
-    // funzione che si occupa della chiamata ajax serieTV e stampa il risultato
-    function getSerieTv(searchString) {
-        // chiamata ajax all'interno di una funzione click
+
+    // funzione generica chiamata ajax getData
+    function getData(type, searchString) {
         $.ajax(
             {
-                "url": serieAPI,
+                "url": "https://api.themoviedb.org/3/search/"+type,
                 "data": {
                     "api_key": ApiKey,
                     "query": searchString,
@@ -63,7 +47,7 @@ $(document).ready(function() {
                 "method": "GET",
                 "success": function(data) {
                     var results = data.results;
-                    renderResults("tv",results);
+                    renderResults(type,results);
                 },
                 "error": function(error) {
                     alert("Errore");
@@ -81,28 +65,39 @@ $(document).ready(function() {
         // stampiamo ogni film ricercato nella chiamata
         for(var i = 0; i < results.length; i++) {
             // creo 2 variabili generiche da passare al context
-            var title, original_title;
+            
+            var title, original_title, container;
 
-            if(type == "film") {
+            if(type == "movie") {
                 title = results[i].title;
                 original_title = results[i].original_title;
+                container = $("#list-movies");
             } else if (type == "tv") {
                 title = results[i].name;
                 original_title = results[i].name;
+                container = $("#list-series");
             }
 
+            // condizione per inserire img poster, se il film non ha poster "null" stampo img di default, altrimenti il poster API
+            if (results[i].poster_path == null) {
+                var poster = "img/no_poster.png";
+            } else {
+                var poster = "https://image.tmdb.org/t/p/w342"+results[i].poster_path;
+            }
+            console.log(poster);
+
             var context = {
+                "poster": poster,
                 "title" : title,
                 "title_original" : original_title,
                 "lang" : getFlags(results[i].original_language),
                 "vote" : getStarsVote(results[i].vote_average),
-                "poster_path": getPoster(results[i].poster_path),
                 "type": type
             };
             // prepariamo il nostro html
             var html = template(context);
             // inseriamo il nostro html nel tag "ul"
-            $("#list-movies").append(html);
+            container.append(html);
 
         }
     }
@@ -111,6 +106,8 @@ $(document).ready(function() {
     function resetSearch() {
         // svuotare lista <ul> dei film e il campo input
         $("#list-movies").html("");
+        // svuotare lista <ul> delle series e il campo input
+        $("#list-series").html("");
         //console.log(searchMovie);
         $(".input-search").val("");
     }
@@ -153,19 +150,6 @@ $(document).ready(function() {
         return lang;
     }
 
-    // funzione che ottiene immagine corrispondente all'elenco
-    function getPoster(poster) {
-        
-        var img = "https://image.tmdb.org/t/p/w185";
-
-        if(poster == null) {
-            img = ;
-        } else {
-            img = "https://image.tmdb.org/t/p/w185" + poster;
-        }
-        return img;
-        
-    }
 
 });  
 

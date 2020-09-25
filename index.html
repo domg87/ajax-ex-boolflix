@@ -19,7 +19,11 @@
         </div>
     </nav>
     <div class="container-main">
+        <h2>Film</h2>
         <ul id="list-movies"></ul>
+
+        <h2>Serie</h2>
+        <ul id="list-series"></ul>
     
 
 
@@ -27,11 +31,11 @@
     
         <script id="movie-template" type="text/x-handlebars-template">
             <li>
-                <img class="poster-img" src="{{poster}}" alt="dio">
+                <div><img class="poster-img" src="{{poster}}" alt="{{title}}"></div>
                 <h3>{{title}}</h3>
                 <p>{{type}}</p>
-                <h4>{{title_original}}</h4>
-                <p>{{{lang}}}</p>
+                <h4>Titolo Originale: {{title_original}}</h4>
+                <p>Lingua Originale: {{{lang}}}</p>
                 <p>Media voto: {{{vote}}}</p>
             </li>
         </script>  
