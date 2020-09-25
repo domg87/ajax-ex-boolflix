@@ -20,7 +20,7 @@ body {
     width: 100vw;
     background-color: #000;
     position: fixed;
-    z-index: 3;
+    z-index: 1;
 }
 
 .left_nav img {
@@ -30,6 +30,23 @@ body {
 
 .right_nav {
   margin-right: 40px;
+}
+
+.input-search {
+    border: none;
+    border-radius: 30px;
+    padding: 5px;
+}
+
+.cerca {
+    color: red;
+}
+
+.search {
+    padding: 5px;
+    border: none;
+    border-radius: 30px;
+
 }
 
 
@@ -55,11 +72,51 @@ body {
     overflow-x: scroll;
 }
 
-
-
-
-
-
 .flag {
     width: 30px;
+    vertical-align: middle;
+}
+
+.vote i.fas{
+    color: red;
+}
+
+.poster-img {
+    width: 342px;
+    height: 513px;
+    border-radius: 20px;
+
+}
+
+.wrapper-template {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    height: 100%;
+    margin: 10px;
+}
+
+.info {
+    overflow: hidden;
+}
+
+.container-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    background-color: lightgrey;
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    display: none;
+}
+
+.wrapper-template:hover .container-overlay {
+    display: block;
+}
+
+li, ul.overlay {
+    list-style: none;
 }

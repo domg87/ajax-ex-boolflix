@@ -92,6 +92,7 @@ $(document).ready(function() {
                 "title_original" : original_title,
                 "lang" : getFlags(results[i].original_language),
                 "vote" : getStarsVote(results[i].vote_average),
+                "overview": results[i].overview,
                 "type": type
             };
             // prepariamo il nostro html

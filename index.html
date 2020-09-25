@@ -19,7 +19,7 @@
             </div>
             <div class="right_nav">
                 <input type="text" class="input-search" placeholder="Cerca un film">
-                <button class="search"><i class="cerca fas fa-search">Cerca</i></button>
+                <button class="search"><i class="cerca fas fa-search"></i></button>
             </div>
         </nav>
     </header>
@@ -39,14 +39,19 @@
         
         
             <script id="movie-template" type="text/x-handlebars-template">
-                <li>
+                <div class="wrapper-template">
                     <div><img class="poster-img" src="{{poster}}" alt="{{title}}"></div>
-                    <h3>{{title}}</h3>
-                    <p>{{type}}</p>
-                    <h4>Titolo Originale: {{title_original}}</h4>
-                    <p>Lingua Originale: {{{lang}}}</p>
-                    <p>Media voto: {{{vote}}}</p>
-                </li>
+                    <div class="container-overlay">
+                        <ul class="overlay info">
+                            <h3>{{title}}</h3>
+                            <li>{{type}}</li>
+                            <li>Titolo Originale: {{title_original}}</li>
+                            <li>Lingua Originale: {{{lang}}}</li>
+                            <li class="vote">Media voto: {{{vote}}}</li>
+                            <li>Trama: {{overview}}</li>
+                        </ul>
+                    </div>
+                </div>
             </script>  
 
         </div>
